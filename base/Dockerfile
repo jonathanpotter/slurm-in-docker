@@ -51,6 +51,11 @@ RUN curl \
   rpmbuild -ta /root/slurm-${SLURM_VERSION}.tar.bz2 && \
   rpm -Uvh $(ls /root/rpmbuild/RPMS/x86_64/*.rpm | grep -v -e 'torque' -e 'openmpi')
 
+# Fix sshd (pam_loginuid doesn't work w containers)
+# http://chris.collins.is/2013/12/21/ssh-in-a-docker-centos-container/
+# https://discuss.linuxcontainers.org/t/regular-user-is-unable-to-login-via-ssh/4119
+RUN sed -c -i '/pam_loginuid.so/d' /etc/pam.d/sshd
+
 VOLUME ["/home", "/.secret"]
 
 #   22:         SSH
