@@ -16,7 +16,7 @@ _ssh_worker() {
     mkdir -p /home/worker
     chown -R worker:worker /home/worker
   fi
-  cat > /home/worker/setup-worker-ssh.sh <<'EOF2'
+  cat > /home/worker/setup-worker-ssh.sh <<'EOFF'
 mkdir -p ~/.ssh
 chmod 0700 ~/.ssh
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N "" -C "$(whoami)@$(hostname)-$(date -I)"
@@ -32,7 +32,7 @@ chmod 0644 ~/.ssh/config
 cd ~/
 tar -czvf ~/worker-secret.tar.gz .ssh
 cd -
-EOF2
+EOFF
   chmod +x /home/worker/setup-worker-ssh.sh
   chown worker: /home/worker/setup-worker-ssh.sh
   sudo -u worker /home/worker/setup-worker-ssh.sh
