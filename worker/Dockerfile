@@ -1,12 +1,12 @@
-FROM scidas/slurm.base:19.05.1
+FROM base:0.0.1
 MAINTAINER Michael J. Stealey <stealey@renci.org>
 
 # install openmpi 3.0.1
 RUN yum -y install \
   gcc-c++ \
   gcc-gfortran \
-  && yum -y localinstall \
-  /packages/openmpi-*.rpm
+  #&& yum -y localinstall \
+  #/packages/openmpi-*.rpm
 
 # install Lmod 7.7
 RUN yum -y install \
